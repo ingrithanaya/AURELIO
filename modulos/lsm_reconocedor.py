@@ -1,28 +1,52 @@
-import math
-
-
 class ReconocedorLSM:
 
 
-    def reconocer(self, puntos):
+    def reconocer(self, manos):
 
-        dedos = self.contar_dedos(puntos)
-
-
-        if dedos == 0:
-            return "A"
+        if len(manos) == 0:
+            return "Sin mano"
 
 
-        elif dedos == 5:
-            return "B"
+        # Si solo hay una mano
+        if len(manos) == 1:
+
+            puntos = manos[0]["puntos"]
+
+            dedos = self.contar_dedos(puntos)
 
 
-        elif dedos == 3:
-            return "C"
+            if dedos == 0:
+                return "A"
+
+            elif dedos == 5:
+                return "B"
+
+            elif dedos == 3:
+                return "C"
+
+            elif dedos == 1:
+                return "HOLA"
 
 
-        elif dedos == 1:
-            return "HOLA"
+        # Dos manos detectadas
+        elif len(manos) == 2:
+
+            izquierda = manos[0]
+            derecha = manos[1]
+
+
+            dedos_izq = self.contar_dedos(
+                izquierda["puntos"]
+            )
+
+            dedos_der = self.contar_dedos(
+                derecha["puntos"]
+            )
+
+
+            # Ejemplo de seña con dos manos abiertas
+            if dedos_izq == 5 and dedos_der == 5:
+                return "GRACIAS"
 
 
         return "Desconocido"
