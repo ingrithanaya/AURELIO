@@ -3,7 +3,7 @@ import time
 
 from modulos.camara import iniciar_camara
 from modulos.mediapipe_detector import DetectorManos
-from modulos.lsm_reconocedor import ReconocedorLSM
+from modulos.predictor_lsm import PredictorLSM
 from modulos.voz import hablar
 
 
@@ -15,8 +15,7 @@ camara = iniciar_camara()
 
 detector = DetectorManos()
 
-reconocedor = ReconocedorLSM()
-
+reconocedor = PredictorLSM()
 
 ultima_sena = ""
 

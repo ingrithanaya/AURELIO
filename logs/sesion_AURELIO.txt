@@ -1,0 +1,83 @@
+﻿**********************
+Inicio de la transcripción de Windows PowerShell
+Hora de inicio: 20260714153753
+Nombre de usuario: INGRITHBLE\aingr
+Usuario RunAs: INGRITHBLE\aingr
+Nombre de la configuración: 
+Máquina: INGRITHBLE (Microsoft Windows NT 10.0.26200.0)
+Aplicación host: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+Id. de proceso: 776
+PSVersion: 5.1.26100.8737
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.8737
+BuildVersion: 10.0.26100.8737
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+La transcripción ha comenzado. El archivo de salida es logs\sesion_AURELIO.txt
+PS C:\Users\aingr\AURELIO> python entrenamiento\entrenar_modelo_lsm.py > logs\entrenamiento_lsm.txt
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="=================================================="
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="ENTRENAMIENTO DEL MODELO LSM - AURELIO"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="=================================================="
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor=""
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="Muestras cargadas: 3523"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor=""
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="Clases encontradas:"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="sena"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="C    1246"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="B    1203"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="A    1074"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="Name: count, dtype: int64"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor=""
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="Entrenando modelo..."
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor=""
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="=============================="
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="Accuracy: 0.9787234042553191"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="=============================="
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor=""
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="Reporte:"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="              precision    recall  f1-score   support"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor=""
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="           A       1.00      0.97      0.99       215"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="           B       0.98      0.98      0.98       241"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="           C       0.96      0.98      0.97       249"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor=""
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="    accuracy                           0.98       705"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="   macro avg       0.98      0.98      0.98       705"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="weighted avg       0.98      0.98      0.98       705"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor=""
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor=""
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="Matriz:"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="[[209   2   4]"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor=" [  0 236   5]"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor=" [  0   4 245]]"
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor=""
+>> EnlaceDeParámetros(Out-File): nombre="InputObject"; valor="Modelo guardado correctamente"
+PS C:\Users\aingr\AURELIO> Start-Transcript -Path logs\sesion_2026-07-14.txt
+La transcripción ha comenzado. El archivo de salida es logs\sesion_2026-07-14.txt
+PS C:\Users\aingr\AURELIO> Stop-Transcript
+La transcripción se ha detenido. El archivo de salida es C:\Users\aingr\AURELIO\logs\sesion_2026-07-14.txt
+PS C:\Users\aingr\AURELIO> git add capturas\dataset_lsm.csv prueba_lsm.py entrenamiento modelos\modelo_lsm.pkl modulos\predictor_lsm.py logs
+
+PS C:\Users\aingr\AURELIO> git add capturas\dataset_lsm.csv prueba_lsm.py entrenamiento modelos\modelo_lsm.pkl modulos\predictor_lsm.py logs
+
+PS C:\Users\aingr\AURELIO> git status
+
+PS C:\Users\aingr\AURELIO> git add logs\sesion_AURELIO.txt
+
+PS C:\Users\aingr\AURELIO> tree "AURELIO ENTRENAMIENTO" /F
+
+PS C:\Users\aingr\AURELIO> git status
+
+PS C:\Users\aingr\AURELIO> notepad .gitignore
+PS C:\Users\aingr\AURELIO> git add .gitignore
+
+PS C:\Users\aingr\AURELIO> git status
+
+PS C:\Users\aingr\AURELIO> Stop-Transcript
+**********************
+Fin de la transcripción de Windows PowerShell
+Hora de finalización: 20260714154908
+**********************
