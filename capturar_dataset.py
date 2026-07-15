@@ -32,8 +32,11 @@ print("Teclas:")
 print("A -> capturar A")
 print("B -> capturar B")
 print("C -> capturar C")
-print("H -> capturar HOLA")
-print("G -> capturar GRACIAS")
+print("D -> capturar D")
+print("E -> capturar E")
+print("F -> capturar F")
+print("G -> capturar G")
+print("H -> capturar H")
 print("Q -> salir")
 print("")
 
@@ -44,17 +47,13 @@ print("")
 
 while True:
 
-
     ret, frame = camara.read()
-
 
     if not ret:
         break
 
 
-
     manos = detector.detectar(frame)
-
 
 
     # Mostrar estado
@@ -68,46 +67,37 @@ while True:
         texto = "Seleccione una sena"
 
 
-
     cv2.putText(
         frame,
         texto,
-        (30,50),
+        (30, 50),
         cv2.FONT_HERSHEY_SIMPLEX,
         1,
-        (0,255,0),
+        (0, 255, 0),
         2
     )
-
 
 
     # ===============================
     # GUARDAR DATOS
     # ===============================
 
-
     if len(manos) > 0 and sena_actual:
 
-
         ahora = time.time()
-
 
         # Guarda cada 150 milisegundos
 
         if ahora - ultimo_guardado > 0.15:
-
 
             capturador.guardar(
                 manos,
                 sena_actual
             )
 
-
             contador += 1
 
-
             ultimo_guardado = ahora
-
 
 
     # Mostrar contador
@@ -115,13 +105,12 @@ while True:
     cv2.putText(
         frame,
         "Muestras: " + str(contador),
-        (30,90),
+        (30, 90),
         cv2.FONT_HERSHEY_SIMPLEX,
         1,
-        (255,255,0),
+        (255, 255, 0),
         2
     )
-
 
 
     cv2.imshow(
@@ -130,14 +119,11 @@ while True:
     )
 
 
-
     # ===============================
     # TECLAS
     # ===============================
 
-
     tecla = cv2.waitKey(1) & 0xFF
-
 
 
     if tecla == ord("a"):
@@ -147,13 +133,11 @@ while True:
         print("Capturando A")
 
 
-
     elif tecla == ord("b"):
 
         sena_actual = "B"
 
         print("Capturando B")
-
 
 
     elif tecla == ord("c"):
@@ -163,21 +147,39 @@ while True:
         print("Capturando C")
 
 
+    elif tecla == ord("d"):
 
-    elif tecla == ord("h"):
+        sena_actual = "D"
 
-        sena_actual = "HOLA"
+        print("Capturando D")
 
-        print("Capturando HOLA")
 
+    elif tecla == ord("e"):
+
+        sena_actual = "E"
+
+        print("Capturando E")
+
+
+    elif tecla == ord("f"):
+
+        sena_actual = "F"
+
+        print("Capturando F")
 
 
     elif tecla == ord("g"):
 
-        sena_actual = "GRACIAS"
+        sena_actual = "G"
 
-        print("Capturando GRACIAS")
+        print("Capturando G")
 
+
+    elif tecla == ord("h"):
+
+        sena_actual = "H"
+
+        print("Capturando H")
 
 
     elif tecla == ord("q"):

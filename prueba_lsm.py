@@ -4,7 +4,7 @@ import time
 from modulos.camara import iniciar_camara
 from modulos.mediapipe_detector import DetectorManos
 from modulos.predictor_lsm import PredictorLSM
-from modulos.voz import hablar
+from modulos.palabras_lsm import ConstructorPalabras
 
 
 # ================================
@@ -16,6 +16,9 @@ camara = iniciar_camara()
 detector = DetectorManos()
 
 reconocedor = PredictorLSM()
+
+constructor = ConstructorPalabras()
+
 
 ultima_sena = ""
 
@@ -43,10 +46,10 @@ while True:
     cv2.putText(
         frame,
         sena,
-        (30,50),
+        (30, 50),
         cv2.FONT_HERSHEY_SIMPLEX,
         1,
-        (0,255,0),
+        (0, 255, 0),
         2
     )
 
@@ -58,9 +61,14 @@ while True:
 
         if tiempo_actual - tiempo_ultima_respuesta > 2:
 
+
+            palabra = constructor.agregar_letra(sena)
+
+
             print("Seña detectada:", sena)
 
-            hablar(sena)
+            print("Palabra actual:", palabra)
+
 
             ultima_sena = sena
 
