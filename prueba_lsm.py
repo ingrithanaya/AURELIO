@@ -4,6 +4,7 @@ import time
 from modulos.camara import iniciar_camara
 from modulos.mediapipe_detector import DetectorManos
 from modulos.predictor_lsm import PredictorLSM
+from modulos.voz import hablar
 from modulos.palabras_lsm import ConstructorPalabras
 
 
@@ -18,7 +19,6 @@ detector = DetectorManos()
 reconocedor = PredictorLSM()
 
 constructor = ConstructorPalabras()
-
 
 ultima_sena = ""
 
@@ -36,12 +36,9 @@ while True:
     if not ret:
         break
 
-
     manos = detector.detectar(frame)
 
-
     sena = reconocedor.reconocer(manos)
-
 
     cv2.putText(
         frame,
@@ -53,39 +50,35 @@ while True:
         2
     )
 
-
     tiempo_actual = time.time()
-
 
     if sena != ultima_sena and sena not in ["Desconocido", "Sin mano"]:
 
         if tiempo_actual - tiempo_ultima_respuesta > 2:
 
-
             palabra = constructor.agregar_letra(sena)
 
-
             print("Seña detectada:", sena)
-
             print("Palabra actual:", palabra)
 
+            palabra_detectada = constructor.verificar_palabra()
+
+            if palabra_detectada:
+
+                print("AURELIO dice:", palabra_detectada)
+
+                hablar(palabra_detectada)
 
             ultima_sena = sena
-
             tiempo_ultima_respuesta = tiempo_actual
-
-
 
     cv2.imshow(
         "AURELIO LSM",
         frame
     )
 
-
     if cv2.waitKey(1) & 0xFF == ord("q"):
         break
-
-
 
 camara.release()
 
