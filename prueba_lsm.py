@@ -6,6 +6,7 @@ from modulos.mediapipe_detector import DetectorManos
 from modulos.predictor_lsm import PredictorLSM
 from modulos.voz import hablar
 from modulos.palabras_lsm import ConstructorPalabras
+from modulos.estabilizador import EstabilizadorLSM
 
 
 # ================================
@@ -19,6 +20,9 @@ detector = DetectorManos()
 reconocedor = PredictorLSM()
 
 constructor = ConstructorPalabras()
+
+# NUEVO: estabilizador
+estabilizador = EstabilizadorLSM(repeticiones=5)
 
 ultima_sena = ""
 
@@ -38,11 +42,17 @@ while True:
 
     manos = detector.detectar(frame)
 
+    # Predicción del modelo
     sena = reconocedor.reconocer(manos)
 
+    # Filtrar la predicción para evitar falsos positivos
+    sena = estabilizador.filtrar(sena)
+
+    # Mostrar texto en pantalla
+    texto = sena if sena else ""
     cv2.putText(
         frame,
-        sena,
+        texto,
         (30, 50),
         cv2.FONT_HERSHEY_SIMPLEX,
         1,
@@ -52,28 +62,30 @@ while True:
 
     tiempo_actual = time.time()
 
-    if sena != ultima_sena and sena not in ["Desconocido", "Sin mano"]:
+    if sena is not None:
 
-        if tiempo_actual - tiempo_ultima_respuesta > 2:
+        if sena != ultima_sena:
 
-            palabra = constructor.agregar_letra(sena)
+            if tiempo_actual - tiempo_ultima_respuesta > 1:
 
-            print("Seña detectada:", sena)
-            print("Palabra actual:", palabra)
+                palabra = constructor.agregar_letra(sena)
 
-            palabra_detectada = constructor.verificar_palabra()
+                print("Seña detectada:", sena)
+                print("Palabra actual:", palabra)
 
-            if palabra_detectada:
+                palabra_detectada = constructor.verificar_palabra()
 
-                print("AURELIO dice:", palabra_detectada)
+                if palabra_detectada:
 
-                hablar(palabra_detectada)
+                    print("AURELIO dice:", palabra_detectada)
 
-            ultima_sena = sena
-            tiempo_ultima_respuesta = tiempo_actual
+                    hablar(palabra_detectada)
+
+                ultima_sena = sena
+                tiempo_ultima_respuesta = tiempo_actual
 
     cv2.imshow(
-        "AURELIO LSM",
+        "AURELIO LSM mapachitos",
         frame
     )
 
