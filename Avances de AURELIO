@@ -1,0 +1,107 @@
+## Avances del desarrollo de AURELIO
+
+Durante el desarrollo del proyecto **AURELIO (Asistente Único de Reconocimiento, Lenguaje, Interacción y Orientación)** se han realizado diferentes avances relacionados con el reconocimiento de señas mediante Lengua de Señas Mexicana (LSM), el procesamiento de imágenes y la organización del sistema.
+
+### 1. Implementación del reconocimiento de manos
+
+Se implementó un módulo de detección de manos utilizando **MediaPipe**, capaz de identificar los puntos de referencia de la mano mediante 21 landmarks. El sistema permite detectar hasta dos manos frente a la cámara y obtener la posición de cada punto en los ejes X, Y y Z.
+
+Esta información constituye la base para el reconocimiento de las diferentes señas que AURELIO debe interpretar.
+
+### 2. Creación del conjunto de datos LSM
+
+Se desarrolló un sistema de captura de muestras para construir el conjunto de datos utilizado por el modelo de reconocimiento.
+
+Actualmente, el conjunto de datos estático contiene:
+
+**34,805 muestras correspondientes a 21 señas.**
+
+Las señas actualmente registradas son:
+
+**A, B, C, D, E, F, G, H, I, L, M, N, O, P, Q, R, S, T, U, W y Y.**
+
+Cada muestra contiene información correspondiente a los 21 puntos de referencia de la mano, utilizando sus coordenadas X, Y y Z.
+
+### 3. Implementación del modelo de clasificación
+
+Para el reconocimiento de las señas estáticas se implementó un modelo basado en **Random Forest**, utilizando 500 árboles de decisión.
+
+El modelo recibe las coordenadas de los landmarks de la mano y realiza una clasificación entre las diferentes señas disponibles.
+
+También se implementó la división del conjunto de datos en datos de entrenamiento y prueba para realizar una evaluación inicial del modelo.
+
+### 4. Implementación del reconocimiento en tiempo real
+
+AURELIO actualmente puede utilizar la cámara para detectar la mano del usuario y enviar los puntos obtenidos al modelo de reconocimiento.
+
+El sistema muestra en pantalla:
+
+* Seña detectada.
+* Porcentaje de compatibilidad.
+* Estado de la detección.
+* Barra visual de compatibilidad.
+
+La compatibilidad se clasifica actualmente en cuatro niveles:
+
+* **80 % o superior:** Alta.
+* **60 % a 79 %:** Media.
+* **40 % a 59 %:** Baja.
+* **Menor de 40 %:** Muy baja.
+
+Esta función permite observar el comportamiento del modelo directamente durante la interacción con la cámara.
+
+### 5. Implementación del reconocimiento dinámico
+
+Además del conjunto de datos de señas estáticas, se inició la preparación de un segundo conjunto de datos destinado al reconocimiento de señas dinámicas.
+
+Para este propósito se incorporó un archivo independiente:
+
+`dataset_lsm_dinamico.csv`
+
+y un módulo de captura:
+
+`modulos/capturador_dinamico.py`
+
+Esto permitirá posteriormente desarrollar un sistema capaz de analizar movimientos de las manos a través del tiempo, ya que algunas expresiones de LSM no pueden identificarse únicamente mediante una posición estática.
+
+### 6. Herramienta de diagnóstico del modelo
+
+Se desarrolló una herramienta de diagnóstico para analizar el comportamiento del reconocimiento de AURELIO.
+
+Esta herramienta permite revisar información relacionada con el modelo y sus resultados, facilitando la identificación de las clases que presentan mayores dificultades de reconocimiento.
+
+### 7. Visor del muestreo
+
+Se desarrolló `ver_muestreo.py`, una herramienta destinada a visualizar las muestras almacenadas en el conjunto de datos.
+
+El visor permite seleccionar una seña y recorrer las muestras almacenadas, mostrando los 21 puntos de referencia de la mano.
+
+Esta herramienta permitirá verificar visualmente la calidad y variedad de las muestras antes de realizar nuevas capturas.
+
+### 8. Análisis del conjunto de datos
+
+A partir del análisis realizado se identificó que las muestras no se encuentran distribuidas de manera uniforme entre todas las señas.
+
+Por ejemplo, algunas clases cuentan con más de 2,400 muestras, mientras que otras cuentan con menos de 1,000.
+
+Por esta razón, se estableció como siguiente objetivo mejorar el equilibrio del conjunto de datos y aumentar la variedad de las muestras, evitando capturar únicamente posiciones prácticamente idénticas.
+
+### 9. Control de versiones
+
+El desarrollo actual fue registrado mediante **Git**, creando un punto de recuperación del proyecto.
+
+El avance fue almacenado mediante el commit:
+
+`86c938d — AURELIO: diagnostico y visor de muestreo LSM`
+
+El repositorio se encuentra actualmente en un estado limpio, sin cambios pendientes, lo que permite continuar con las siguientes etapas del desarrollo manteniendo una versión estable del proyecto.
+
+### 10. Siguiente etapa
+
+La siguiente etapa consiste en mejorar el conjunto de datos mediante un proceso de muestreo más controlado.
+
+Se propone establecer aproximadamente **3,000 muestras por seña** como objetivo inicial, priorizando la variedad de las muestras y no únicamente la cantidad.
+
+Las nuevas capturas deberán considerar variaciones de posición, distancia y orientación de la mano para que el modelo aprenda las características de cada seña y no solamente una posición específica frente a la cámara.
+
+Posteriormente se realizará un nuevo entrenamiento y una evaluación con muestras que no hayan sido utilizadas durante el entrenamiento, con el objetivo de comprobar el desempeño real del reconocimiento de AURELIO.
